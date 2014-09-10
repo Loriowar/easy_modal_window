@@ -1,0 +1,10 @@
+-# modal_options - local variable (class: EasyModalWindow::Dialog)
+
+- if modal_options.object.present? && modal_options.object.errors.blank?
+  %h3
+    = modal_options.success_message
+- else
+  %ul{class: modal_options.container_class}
+    - modal_options.object.errors.full_messages.each do |message|
+      %li{class: modal_options.element_class}
+        = message

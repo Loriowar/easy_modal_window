@@ -1,0 +1,28 @@
+<%# modal_options - local variable (class: EasyModalWindow::Dialog) %>
+
+var $modalWindow = $('<%= modal_options.window_selector %>');
+
+$modalWindow.html("<%= j render template: modal_options.render_template,
+                                formats: modal_options.formats %>");
+var $titleElement = $modalWindow.find('<%= modal_options.title_selector %>');
+var title = $titleElement.text();
+$titleElement.hide();
+$modalWindow.dialog({
+  resizable: <%= modal_options.resizable %>,
+  modal: true,
+  height: '<%= modal_options.height %>',
+  width: '<%= modal_options.width %>',
+  title: title,
+  <% if modal_options.before_close[:condition] %>
+    beforeClose: function() {<% modal_options.before_close[:action] %>},
+  <% end %>
+  buttons: {
+    <% modal_options.buttons.each do |_, button_options| %>
+      <% if button_options[:condition] %>
+        "<%= button_options[:name] %>": function() {
+          <%= button_options[:action] %>
+        }
+      <% end %>
+    <% end %>
+  }
+});
