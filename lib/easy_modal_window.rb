@@ -56,7 +56,7 @@ module EasyModalWindow
         return result
       end
 
-      if @modal_options[:before_close].has_key?(:condition) && @modal_options[:before_close][:condition].present?
+      if @modal_options[:before_close].has_key?(:condition)
         result[:condition] = value_of(@modal_options[:before_close][:condition])
       else
         result[:condition] = true
@@ -79,7 +79,7 @@ module EasyModalWindow
   private
 
     def value_of(var)
-      var.lambda? ? var.call : var
+      var.is_a?(Proc) ? var.call : var
     end
 
   end

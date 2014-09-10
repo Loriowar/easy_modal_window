@@ -19,7 +19,7 @@ module EasyModalWindow
       if options.has_key?(:view)
         dialog = EasyModalWindow::Dialog.new(options)
         render template: "easy_modal_window/#{options[:view]}",
-               locals: dialog.modal_options,
+               locals: {modal_options: dialog},
                formats: options[:format] || [:js]
       end
     end

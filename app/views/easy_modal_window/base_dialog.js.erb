@@ -14,14 +14,14 @@ $modalWindow.dialog({
   width: '<%= modal_options.width %>',
   title: title,
   <% if modal_options.before_close[:condition] %>
-    beforeClose: function() {<% modal_options.before_close[:action] %>},
+    beforeClose: function() {<%= modal_options.before_close[:action].html_safe %>},
   <% end %>
   buttons: {
-    <% modal_options.buttons.each do |_, button_options| %>
+    <% modal_options.buttons.each do |button_options| %>
       <% if button_options[:condition] %>
         "<%= button_options[:name] %>": function() {
-          <%= button_options[:action] %>
-        }
+          <%= button_options[:action].html_safe %>
+        },
       <% end %>
     <% end %>
   }
