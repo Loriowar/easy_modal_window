@@ -6,6 +6,10 @@ module EasyModalWindow
 
     attr_reader :modal_options
 
+    ALLOVED_OPTIONS = [:window_selector, :title_selector, :render_template, :formats,
+                       :resizable, :height, :width, :buttons, :before_close, :success_message,
+                       :object, :container_class, :element_class, :errors_group_class].freeze
+
     def initialize(args)
       @modal_options = {}
       @modal_options[:window_selector] = '#ajax-modal'
@@ -31,10 +35,10 @@ module EasyModalWindow
       @modal_options[:element_class] = ''
       @modal_options[:errors_group_class] = ''
 
-      @modal_options.merge!(args.select{|k, _| @modal_options.keys.include?(k.to_sym)})
+      @modal_options.merge!(args.slice(*EasyModalWindow::Dialog::ALLOVED_OPTIONS))
     end
 
-    @modal_options.keys.reject{|key| [:before_close, :buttons].include?(key) }.each do |method|
+    (ALLOVED_OPTIONS - [:before_close, :buttons]).each do |method|
       class_eval <<-EOT, __FILE__, __LINE__ + 1
         def #{method}
           @modal_options[:#{method}]
