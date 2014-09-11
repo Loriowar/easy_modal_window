@@ -46,6 +46,7 @@ module EasyModalWindow
       EOT
     end
 
+    # TODO: simplify this method
     def before_close
       result = {}
       if @modal_options[:before_close].has_key?(:action) && @modal_options[:before_close][:action].present?
@@ -56,11 +57,7 @@ module EasyModalWindow
         return result
       end
 
-      if @modal_options[:before_close].has_key?(:condition)
-        result[:condition] = value_of(@modal_options[:before_close][:condition])
-      else
-        result[:condition] = true
-      end
+      result[:condition] = @modal_options[:before_close][:condition].nil? || value_of(@modal_options[:before_close][:condition])
 
       result
     end
@@ -69,7 +66,7 @@ module EasyModalWindow
       @modal_options[:buttons].inject([]) do |h, v|
         option = {}
         option[:name] = v.last[:name] || 'unknown'
-        option[:condition] = value_of(v.last[:condition])
+        option[:condition] = value_of(v.last[:condition]).nil? || value_of(v.last[:condition])
         option[:action] = v.last[:action] || ''
         h << option
         h
