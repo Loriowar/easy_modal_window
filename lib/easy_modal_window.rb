@@ -6,7 +6,7 @@ module EasyModalWindow
 
     attr_reader :modal_options
 
-    ALLOVED_OPTIONS = [:window_selector, :title_selector, :render_template, :formats,
+    ALLOWED_OPTIONS = [:window_selector, :title_selector, :render_template, :formats,
                        :resizable, :height, :width, :buttons, :before_close, :success_message,
                        :object, :container_class, :element_class, :errors_group_class].freeze
 
@@ -35,10 +35,10 @@ module EasyModalWindow
       @modal_options[:element_class] = ''
       @modal_options[:errors_group_class] = ''
 
-      @modal_options.merge!(args.slice(*EasyModalWindow::Dialog::ALLOVED_OPTIONS))
+      @modal_options.merge!(args.slice(*EasyModalWindow::Dialog::ALLOWED_OPTIONS))
     end
 
-    (ALLOVED_OPTIONS - [:before_close, :buttons]).each do |method|
+    (ALLOWED_OPTIONS - [:before_close, :buttons]).each do |method|
       class_eval <<-EOT, __FILE__, __LINE__ + 1
         def #{method}
           @modal_options[:#{method}]
