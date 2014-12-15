@@ -46,6 +46,8 @@ Helper `render_base_dialog`. It take parameters like a `dialog`, but in more eas
 
 Here we can skip any parameters except `render_template`.
 
+**NOTE:** by default modal window puts in `#ajax-modal` element; you can specify other selector in `window_selector` option.
+
 ### ActiveRecord errors
 
 Helper `render_active_record_result` provide easy way to render list with several AR errors.
