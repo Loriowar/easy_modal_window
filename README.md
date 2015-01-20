@@ -26,6 +26,7 @@ Helper `render_base_dialog`. It take parameters like a `dialog`, but in more eas
 
     render_base_dialog(
       render_template:  'example_template',
+      locals:           {id: 42},
       resizable:        false,
       height:           'auto',
       width:            'auto',
@@ -44,7 +45,7 @@ Helper `render_base_dialog`. It take parameters like a `dialog`, but in more eas
         }
       }
 
-Here we can skip any parameters except `render_template`.
+Here we can skip any parameters except `render_template` or `render_partial`.
 
 **NOTE:** by default modal window puts in `#ajax-modal` element; you can specify other selector in `window_selector` option.
 
