@@ -6,15 +6,17 @@ module EasyModalWindow
 
     attr_reader :modal_options
 
-    ALLOWED_OPTIONS = [:window_selector, :title_selector, :render_template, :formats,
-                       :resizable, :height, :width, :buttons, :before_close, :success_message,
+    ALLOWED_OPTIONS = [:window_selector, :title_selector, :render_template, :render_partial, :formats,
+                       :locals, :resizable, :height, :width, :buttons, :before_close, :success_message,
                        :object, :container_class, :element_class, :errors_group_class].freeze
 
     def initialize(args)
       @modal_options = {}
       @modal_options[:window_selector] = '#ajax-modal'
       @modal_options[:title_selector] = 'h3.title'
-      @modal_options[:render_template] = ''
+      @modal_options[:render_template] = nil
+      @modal_options[:render_partial] = nil
+      @modal_options[:locals] = {}
       @modal_options[:formats] = [:html]
       @modal_options[:resizable] = true
       @modal_options[:height] = 'auto'

@@ -2,8 +2,15 @@
 
 var $modalWindow = $('<%= modal_options.window_selector %>');
 
-$modalWindow.html("<%= j render template: modal_options.render_template,
-                                formats: modal_options.formats %>");
+<% render_options = {formats: modal_options.formats,
+                     locals: modal_options.locals} %>
+
+<% if modal_options.render_template.present? %>
+  $modalWindow.html("<%= j render render_options.merge(template: modal_options.render_template) %>");
+<% elsif modal_options.render_partial.present? %>
+  $modalWindow.html("<%= j render render_options.merge(partial: modal_options.render_partial) %>");
+<% end %>
+
 var $titleElement = $modalWindow.find('<%= modal_options.title_selector %>');
 var title = $titleElement.text();
 $titleElement.hide();
