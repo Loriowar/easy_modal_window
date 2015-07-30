@@ -3,6 +3,8 @@
 This is wrapper for jQuery-UI Dialog. Additionally it contain several templates for render errors from ActiveRecord and 
 [ErrorMessagesContainer](https://github.com/Loriowar/error_messages_container).
 
+[![Gem Version](https://badge.fury.io/rb/easy_modal_window.png)](http://badge.fury.io/rb/easy_modal_window)
+
 ## Dependency
 
 Gem require [jQuery-UI](https://jqueryui.com/) version 1.8 or greater.
