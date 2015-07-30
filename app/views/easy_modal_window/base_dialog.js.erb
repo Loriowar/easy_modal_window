@@ -26,8 +26,12 @@ $modalWindow.dialog({
   buttons: {
     <% modal_options.buttons.each do |button_options| %>
       <% if button_options[:condition] %>
-        "<%= button_options[:name] %>": function() {
-          <%= button_options[:action].html_safe %>
+        "<%= button_options[:internal_name] %>": {
+            text: "<%= button_options[:name] %>",
+            class: "<%= button_options[:class] %>",
+            click: function() {
+                     <%= button_options[:action].html_safe %>
+                   }
         },
       <% end %>
     <% end %>

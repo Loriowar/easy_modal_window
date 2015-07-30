@@ -23,7 +23,8 @@ module EasyModalWindow
       @modal_options[:width] = 'auto'
       # hash with button descriptions: {first_button: {name: 'Name',
       #                                                condition: -> {...},
-      #                                                action: 'location.reload();'},
+      #                                                action: 'location.reload();',
+      #                                                class: 'my-css-class'},
       #                                 second_button: ...}
       @modal_options[:buttons] = {}
       # dialog callbacks
@@ -65,13 +66,16 @@ module EasyModalWindow
     end
 
     def buttons
-      @modal_options[:buttons].inject([]) do |h, v|
-        option = {}
-        option[:name] = v.last[:name] || 'unknown'
-        option[:condition] = value_of(v.last[:condition]).nil? || value_of(v.last[:condition])
-        option[:action] = v.last[:action] || ''
-        h << option
-        h
+      @modal_options[:buttons].inject([]) do |h, (k, v)|
+        h.push(
+            {
+                internal_name: k,
+                name: v[:name] || 'unknown',
+                condition: value_of(v[:condition]).nil? || value_of(v[:condition]),
+                action: v[:action] || '',
+                class: v[:class] || ''
+            }
+        )
       end
     end
 

@@ -1,6 +1,11 @@
 # EasyModalWindow
 
-This is wrapper for jQuery-UI Dialog. Additionaly it contain several templates for render errors from ActiveRecord and ErrorMessagesContainer.
+This is wrapper for jQuery-UI Dialog. Additionally it contain several templates for render errors from ActiveRecord and 
+[ErrorMessagesContainer](https://github.com/Loriowar/error_messages_container).
+
+## Dependency
+
+Gem require [jQuery-UI](https://jqueryui.com/) version 1.8 or greater.
 
 ## Installation
 
@@ -37,11 +42,13 @@ Helper `render_base_dialog`. It take parameters like a `dialog`, but in more eas
       buttons: {
         load_button: {
           name:         l(:load_button),
-          action:       "$('#modal-window-ajax-form').submit();"
+          action:       "$('#modal-window-ajax-form').submit();",
+          class:        'my-first-css-class'
         },
         close_button: {
           name:         l(:close_button),
-          action:       "$(this).dialog('close');"
+          action:       "$(this).dialog('close');",
+          class:        'my-second-css-class'
         }
       }
 
