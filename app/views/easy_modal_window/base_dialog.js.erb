@@ -21,7 +21,13 @@ $modalWindow.dialog({
   width: '<%= modal_options.width %>',
   title: title,
   <% if modal_options.before_close[:condition] %>
-    beforeClose: function() {<%= modal_options.before_close[:action].html_safe %>},
+    beforeClose: function() {
+      if(typeof window['<%= modal_options.before_close[:function].html_safe %>'] === 'function') {
+        window['<% modal_options.before_close[:action].html_safe %>']();
+      } else {
+        <%= modal_options.before_close[:action].html_safe %>
+      }
+    },
   <% end %>
   buttons: {
     <% modal_options.buttons.each do |button_options| %>
@@ -30,7 +36,11 @@ $modalWindow.dialog({
             text: "<%= button_options[:name] %>",
             class: "<%= button_options[:class] %>",
             click: function() {
-                     <%= button_options[:action].html_safe %>
+                     if(typeof window['<%= button_options[:function].html_safe %>'] === 'function') {
+                       window['<% button_options[:action].html_safe %>']();
+                     } else {
+                       <%= button_options[:action].html_safe %>
+                     }
                    }
         },
       <% end %>

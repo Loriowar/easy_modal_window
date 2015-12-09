@@ -54,9 +54,11 @@ module EasyModalWindow
       result = {}
       if @modal_options[:before_close].has_key?(:action) && @modal_options[:before_close][:action].present?
         result[:action] = @modal_options[:before_close][:action]
+        result[:function] = like_js_function?(result[:action]) ? result[:action] : ' '
       else
         result[:condition] = false
         result[:action] = ''
+        result[:function] = ' '
         return result
       end
 
@@ -73,6 +75,7 @@ module EasyModalWindow
                 name: v[:name] || 'unknown',
                 condition: value_of(v[:condition]).nil? || value_of(v[:condition]),
                 action: v[:action] || '',
+                function: like_js_function?(v[:action]) ? v[:action] : ' ',
                 class: v[:class] || ''
             }
         )
@@ -83,6 +86,11 @@ module EasyModalWindow
 
     def value_of(var)
       var.is_a?(Proc) ? var.call : var
+    end
+
+    def like_js_function?(str)
+      # NOTE: this is not full list of restricted symbols, but it enough for rough solution
+      str =~ /[\'\'"\n\r\\\|\/]/ ? false : true
     end
 
   end

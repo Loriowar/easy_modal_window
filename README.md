@@ -44,12 +44,12 @@ Helper `render_base_dialog`. It take parameters like a `dialog`, but in more eas
       buttons: {
         load_button: {
           name:         l(:load_button),
-          action:       "$('#modal-window-ajax-form').submit();",
+          action:       "$('#modal-window-ajax-form').submit();", // or name of js function from global scope
           class:        'my-first-css-class'
         },
         close_button: {
           name:         l(:close_button),
-          action:       "$(this).dialog('close');",
+          action:       "$(this).dialog('close');", // or name of js function from global scope
           class:        'my-second-css-class'
         }
       }
